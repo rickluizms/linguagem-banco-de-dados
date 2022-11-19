@@ -132,7 +132,6 @@ SELECT first_name, last_name, salary
 FROM employees
 WHERE first_name LIKE '%John%';
 
-
 /*O Operador IS NULL
 Verifica quais campos que estão com valores nulos
 
@@ -141,6 +140,7 @@ voce testara um valor nulo:*/
 SELECT first_name, last_name, salary, Manager_id
 FROM employees
 WHERE Manager_id IS NULL;
+
 
 /*Expressões Negativas
 Podemos tambem negar todos os operadores estudados:
@@ -169,3 +169,82 @@ WHERE first_name NOT LIKE 'S%';
 SELECT first_name, last_name, salary, Manager_id
 FROM employees
 WHERE Manager_id IS NOT NULL;
+
+
+/*Pesquisando Dados com Múltiplas Condições,
+Os operadores AND e OR devem ser usados para fazer composições de
+expressões lógicas;
+• O predicado AND esperará que ambas as condições sejam verdadeiras;
+• O predicado OR esperará que uma das condições seja verdadeira.*/
+
+/*Nos dois seguintes exemplos as condições são as mesmas, mas cada resultado
+é diferente entre si. 
+Veja como o resultado é dramaticamente alterado:*/
+
+/*Para encontrar todos os escriturários do departamento estoque que ganhem
+entre 2.000 e 3.000:*/
+SELECT first_name, last_name, Salary, Job_ID
+FROM Employees
+WHERE Salary BETWEEN 2000 AND 3000
+            AND Job_id = 'ST_CLERK';
+            
+/*Para encontrar todos os escriturários do departamento estoque E OS
+funcionários que ganhem entre 2.000 e 3.000.*/
+SELECT first_name, last_name, Salary, Job_ID
+FROM Employees
+WHERE Salary BETWEEN 2000 AND 3000
+            OR Job_id = 'ST_CLERK';
+            
+/*Você pode combinar AND e OR na mesma expressão lógica. Ou seja, quando
+AND e OR aparecerem na mesma cláusula WHERE, todos os AND serão feitos
+primeiro e, posteriormente, todos os OR o serão.*/
+SELECT first_name, last_name, Salary, Job_ID
+FROM Employees
+WHERE Salary > 8000 and
+                    Job_id = 'ST_CLERK' OR
+                    Job_id = 'ST_MAN';
+                    
+/*Se você quiser selecionar todos os escriturários e gerentes que ganhem acima
+de 8.000, deverá empregar parênteses para estabelecer tal prioridade:*/
+SELECT first_name, last_name, Salary, Job_ID
+FROM Employees
+WHERE Salary > 8000 and
+                    (Job_id = 'ST_CLERK' OR
+                    Job_id = 'ST_MAN');
+                    
+                    
+/*A Clausula ORDER BY
+Normalmente, a ordem das linhas retornadas de uma pesquisa é indefinida.
+Assim, a cláusula ORDER BY pode ser empregada para ordenar as linhas.
+Se utilizada, ORDER BY deve ser sempre a última cláusula da declaração
+SELECT.*/
+
+/*Para ordenar essa consulta pelo campo Last_Name, faça:*/
+SELECT first_name, last_name, Salary
+FROM Employees
+WHERE Salary BETWEEN 10000 and 20000
+ORDER BY last_name;
+
+/*Para inverter essa ordem, acrescente o comando DESC – decrescente –depois
+do nome das colunas da cláusula ORDER BY*/
+SELECT first_name, last_name, Salary
+FROM Employees
+WHERE Salary BETWEEN 10000 and 20000
+ORDER BY last_name DESC;
+
+/*Para ordenar por duas colunas e mostrar a ordem inversa do salário – e ordem
+crescente do sobrenome –, faça:*/
+SELECT first_name, last_name, Salary
+FROM Employees
+WHERE Salary BETWEEN 10000 AND 20000
+ORDER BY Salary DESC, last_name;
+
+/*Para ordenar por uma coluna, esta não precisa necessariamente estar declarada
+no SELECT.
+
+Ademais, a cláusula ORDER BY é empregada na pesquisa quando se quer
+mostrar as linhas em uma ordem específica – afinal, sem a cláusula ORDER BY,
+as linhas são retornadas na ordem conveniente para o Oracle.
+
+Finalmente, tal comando não altera a ordem dos dados que estão armazenados
+no banco de dados*/
