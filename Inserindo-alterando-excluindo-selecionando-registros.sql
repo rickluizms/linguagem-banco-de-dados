@@ -83,6 +83,14 @@ SELECT DISTINCT job_id
 FROM employees 
 ORDER BY job_id;
 
+/*Operadores SQL,
+Existem quatro operadores SQL, os quais figuram com todos os tipos de dados:
+    BETWEEN...AND... -> Entre dois valores -- inclusive
+    IN (lista) -> Comparar uma lista de valores
+    LIKE -> Comparar um parametro alfanumerico
+    IS NULL -> E um valor nulo
+*/
+
 /*O Operador BETWEEN
 Compara uma faixa de valores inclusive o menor e maior valor.
 Suponhamos que nós quisemos ver aqueles empregados os quais o salario esta entre 10000 e 20000*/
