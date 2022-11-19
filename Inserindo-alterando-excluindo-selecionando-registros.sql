@@ -97,3 +97,67 @@ Manager, ultilize o seguinte comando*/
 SELECT first_name, last_name, salary, Manager_id
 FROM employees
 WHERE Manager_id IN (101, 145, 149);
+
+/*O Operador LIKE
+Algumas vezes voce precisa procurar valores que voce nao conhece
+exatamente. Usando o operador LIKE e possivel selecionar linhas
+combinando parametros alfanumericos. O caracter % é ultilizado como
+"coringa" nas pesquisas. Veja exemplo abaixo:
+
+    LIKE '%cadeia' -> Localiza valores que terminem com a cadeia de caracteres
+    LIKE 'cadeia%' -> Localiza valores que comecem com a cadeia de caracteres
+    LIKE '%cadeia%' -> Localiza valores que tenham a cadeia de caracteres em qualquer parte do campo
+*/
+
+/*Nomes com inicial (S)*/
+SELECT first_name, last_name, salary
+FROM employees
+WHERE first_name LIKE 'S%';
+
+/*Nomes com final (n)*/
+SELECT first_name, last_name, salary
+FROM employees
+WHERE first_name LIKE '%n';
+
+/*Nomes (John)*/
+SELECT first_name, last_name, salary
+FROM employees
+WHERE first_name LIKE '%John%';
+
+
+/*O Operador IS NULL
+Verifica quais campos que estão com valores nulos
+
+Unicamente encontrar todos os empregados que nao tenham gerente,
+voce testara um valor nulo:*/
+SELECT first_name, last_name, salary, Manager_id
+FROM employees
+WHERE Manager_id IS NULL;
+
+/*Expressões Negativas
+Podemos tambem negar todos os operadores estudados:
+    NOT BETWEEN -> Tudo que estiver fora da faixa
+    NOT IN -> Tudo que não estiver na lista
+    NOT LIKE -> Tudo que não conter a linha de caracteres
+    IS NOT NULL -> Tudo que não for nulo
+*/
+
+/*NOT BETWEEN*/
+SELECT first_name, Last_name, Salary
+FROM Employees
+WHERE Salary NOT BETWEEN 10000 AND 20000;
+
+/*NOT IN*/
+SELECT first_name, last_name, salary, Manager_id
+FROM employees
+WHERE Manager_id NOT IN (101, 145, 149);
+
+/*NOT LIKE*/
+SELECT first_name, last_name, salary
+FROM employees
+WHERE first_name NOT LIKE 'S%';
+
+/*IS NOT NULL*/
+SELECT first_name, last_name, salary, Manager_id
+FROM employees
+WHERE Manager_id IS NOT NULL;
